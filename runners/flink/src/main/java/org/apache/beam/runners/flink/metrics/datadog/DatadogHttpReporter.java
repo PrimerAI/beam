@@ -25,6 +25,7 @@ import org.apache.flink.metrics.Meter;
 import org.apache.flink.metrics.Metric;
 import org.apache.flink.metrics.MetricConfig;
 import org.apache.flink.metrics.MetricGroup;
+import org.apache.flink.metrics.datadog.DataCenter;
 import org.apache.flink.metrics.datadog.DatadogHttpClient;
 import org.apache.flink.metrics.reporter.MetricReporter;
 import org.apache.flink.metrics.reporter.Scheduled;
@@ -80,6 +81,11 @@ public class DatadogHttpReporter implements MetricReporter, Scheduled {
                 proxyPort,
                 dataCenter,
                 maxMetricsPerRequestValue);
+    }
+
+    /** Get config tags from config 'metrics.reporter.dghttp.tags'. */
+    private List<String> getTagsFromConfig(String str) {
+        return Arrays.asList(str.split(","));
     }
 
 }
